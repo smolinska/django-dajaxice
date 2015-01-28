@@ -51,7 +51,7 @@ class DajaxiceRequest(View):
             try:
                 response = function.call(request, **data)
             except Exception:
-                if settings.DEBUG:
+                if settings.DEBUG or getattr(settings, 'DAJAXICE_RAISE_EXCEPTIONS', False):
                     raise
                 response = dajaxice_config.DAJAXICE_EXCEPTION
             if django.get_version() >= '1.7':
